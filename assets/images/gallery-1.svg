@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#17061c"/>
+  <circle cx="400" cy="330" r="180" fill="#ffb4d7" opacity="0.7"/>
+  <circle cx="400" cy="330" r="120" fill="#fff0f7" opacity="0.6"/>
+  <path d="M220 740c60-150 160-220 260-220s200 70 260 220" fill="none" stroke="#ff8ecb" stroke-width="28" stroke-linecap="round"/>
+  <text x="400" y="920" text-anchor="middle" fill="#ffe8f4" font-family="Segoe UI, sans-serif" font-size="44">Your Love Story</text>
+</svg>

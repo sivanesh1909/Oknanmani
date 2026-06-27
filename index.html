@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#130716" />
+    <meta name="description" content="A luxurious birthday surprise for Kanmani" />
+    <title>Happy Birthday My Kanmani</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+  </head>
+  <body>
+    <div class="preloader" aria-live="polite">
+      <div class="preloader-heart">💖</div>
+      <div class="preloader-particles" aria-hidden="true"></div>
+      <p class="preloader-quote">"Love is the most beautiful language of the heart."</p>
+      <div class="preloader-bar">
+        <span></span>
+      </div>
+    </div>
+
+    <div class="ambient-layer" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <main class="page-content">
+      <section class="hero section" id="top">
+        <div class="hero-backdrop"></div>
+        <div class="hero-content glass-card">
+          <p class="eyebrow">For My Beloved Kanmani</p>
+          <h1>Happy Birthday My Kanmani <span>❤️</span></h1>
+          <p class="hero-copy">Every heartbeat of mine whispers your name.</p>
+          <button class="hero-btn" data-scroll="#love-timer">❤️ Open My Heart ❤️</button>
+          <div class="hero-heart" aria-label="Main heart">💗</div>
+        </div>
+      </section>
+
+      <section class="section" id="love-timer">
+        <div class="section-heading">
+          <p class="eyebrow">Love Timer</p>
+          <h2>❤️ I Have Loved You For ❤️</h2>
+        </div>
+        <div class="timer-grid">
+          <div class="timer-card glass-card"><span class="timer-value" id="days">00</span><span class="timer-label">Days</span></div>
+          <div class="timer-card glass-card"><span class="timer-value" id="hours">00</span><span class="timer-label">Hours</span></div>
+          <div class="timer-card glass-card"><span class="timer-value" id="minutes">00</span><span class="timer-label">Minutes</span></div>
+          <div class="timer-card glass-card"><span class="timer-value" id="seconds">00</span><span class="timer-label">Seconds</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="story">
+        <div class="section-heading">
+          <p class="eyebrow">Our Beautiful Story</p>
+          <h2>Love Story Timeline</h2>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">50 Reasons</p>
+          <h2>50 Reasons Why I Love You</h2>
+        </div>
+        <div class="reasons-grid" id="reasons-grid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">A Letter From My Heart</p>
+          <h2>Love Letter</h2>
+        </div>
+        <div class="letter-wrap">
+          <button class="envelope" id="envelope" aria-label="Open love letter">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body"></div>
+            <div class="letter" id="letter">
+              <p id="letter-text"></p>
+            </div>
+            <button class="letter-scroll" id="letter-scroll" type="button" aria-label="Scroll letter">↓</button>
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Heartfelt Feeling</p>
+          <h2>Love Meter</h2>
+        </div>
+        <div class="meter-card glass-card">
+          <button class="love-heart" id="love-heart" aria-label="Increase love meter">💖</button>
+          <p class="meter-label" id="meter-label">I Love You ×100</p>
+          <p class="meter-caption">Every tap makes my heart sing for you.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Forever Memories</p>
+          <h2>Photo Gallery</h2>
+        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+          <button class="lightbox-close" id="lightbox-close">×</button>
+          <img id="lightbox-image" src="" alt="Expanded memory" />
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Birthday Magic</p>
+          <h2>Birthday Cake</h2>
+        </div>
+        <div class="cake-card glass-card">
+          <div class="cake-wrap">
+            <div class="cake">
+              <div class="cake-layer cake-top"></div>
+              <div class="cake-layer cake-middle"></div>
+              <div class="cake-layer cake-bottom"></div>
+              <div class="cake-icing"></div>
+              <div class="candle"></div>
+              <div class="flame"></div>
+            </div>
+          </div>
+          <button class="cake-btn" id="cake-btn">🎂 Blow Candle</button>
+          <p class="cake-message" id="cake-message">Happy Birthday Kanmani ❤️</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">A Precious Gift</p>
+          <h2>Surprise Gift</h2>
+        </div>
+        <div class="gift-card glass-card">
+          <button class="gift-box" id="gift-box" aria-label="Open gift box">
+            <div class="gift-lid"></div>
+            <div class="gift-body"></div>
+          </button>
+          <p class="gift-message" id="gift-message">You are the greatest gift life has ever given me.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Tiny Treasure</p>
+          <h2>Love Quiz</h2>
+        </div>
+        <div class="quiz-card glass-card">
+          <p class="quiz-question">Who Loves You The Most?</p>
+          <div class="quiz-options">
+            <button class="quiz-option" data-correct="true">Me ❤️</button>
+            <button class="quiz-option">Me ❤️</button>
+            <button class="quiz-option">Me ❤️</button>
+            <button class="quiz-option">Me ❤️</button>
+          </div>
+          <p class="quiz-answer" id="quiz-answer" hidden>Correct Answer ❤️</p>
+        </div>
+      </section>
+
+      <section class="section final-section">
+        <div class="final-card glass-card">
+          <p class="eyebrow">Forever and Always</p>
+          <h2>My world became beautiful because you are in it.</h2>
+          <p class="final-line">❤️ Happy Birthday My Kanmani ❤️</p>
+          <p class="final-signature">Forever Yours,<br />❤️ Sachu ❤️</p>
+        </div>
+      </section>
+    </main>
+
+    <audio id="bg-audio" preload="auto" src="assets/music/Mental-Manadhil.mp3"></audio>
+
+    <div class="music-player glass-card" aria-label="Music player">
+      <div class="player-info">
+        <p class="player-title">Our Favourite Music</p>
+        <p class="player-track" id="player-track">Mental Manathil · O Kadhal Kanmani</p>
+      </div>
+      <div class="player-controls">
+        <button class="player-btn" id="prev-btn">⏮</button>
+        <button class="player-btn" id="play-btn">▶</button>
+        <button class="player-btn" id="next-btn">⏭</button>
+      </div>
+      <div class="volume-wrap">
+        <input type="range" id="volume" min="0" max="1" step="0.05" value="0.45" />
+      </div>
+      <div class="equalizer" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="easter-overlay" id="easter-overlay" aria-hidden="true">
+      <div class="easter-content">
+        <h2>I Love You Forever Kanmani ❤️♾️</h2>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

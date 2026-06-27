@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#18081f"/>
+  <path d="M220 240c0-90 70-160 160-160s160 70 160 160c0 96-120 200-160 280-40-80-160-184-160-280z" fill="#ff8ecb"/>
+  <path d="M420 240c0-90 70-160 160-160s160 70 160 160c0 96-120 200-160 280-40-80-160-184-160-280z" fill="#c4b3ff"/>
+  <text x="400" y="900" text-anchor="middle" fill="#ffeef8" font-family="Segoe UI, sans-serif" font-size="44">My Heart Is Yours</text>
+</svg>

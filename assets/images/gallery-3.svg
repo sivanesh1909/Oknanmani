@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#120614"/>
+  <circle cx="400" cy="360" r="220" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb6d0"/>
+      <stop offset="100%" stop-color="#c4b3ff"/>
+    </linearGradient>
+  </defs>
+  <path d="M260 690c40-120 110-180 180-180s140 60 180 180" fill="none" stroke="#fff" stroke-width="24" stroke-linecap="round"/>
+  <text x="400" y="900" text-anchor="middle" fill="#fff7fe" font-family="Segoe UI, sans-serif" font-size="44">Sweet Memories</text>
+</svg>

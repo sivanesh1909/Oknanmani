@@ -1,0 +1,9 @@
+{
+  "name": "Happy Birthday Kanmani",
+  "short_name": "Kanmani",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#09030d",
+  "theme_color": "#130716",
+  "description": "A luxury birthday surprise website for Kanmani"
+}
