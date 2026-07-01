@@ -93,6 +93,9 @@ const giftBox = document.getElementById("gift-box");
 const giftMessage = document.getElementById("gift-message");
 const quizOptions = document.querySelectorAll(".quiz-option");
 const quizAnswer = document.getElementById("quiz-answer");
+const promiseGenerator = document.getElementById("promise-generator");
+const promiseOutput = document.getElementById("promise-output");
+const moodButtons = document.querySelectorAll(".mood-btn");
 const playBtn = document.getElementById("play-btn");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -381,6 +384,45 @@ function setUpQuiz() {
   });
 }
 
+function attachPremiumInteractions() {
+  const promises = [
+    "I will keep choosing your smile, every single day.",
+    "I will hold your heart with gentleness and forever.",
+    "I will make your ordinary days feel like a fairytale.",
+    "I will keep loving the beautiful soul that you are.",
+    "I will always be your soft place to belong."
+  ];
+
+  promiseGenerator?.addEventListener("click", () => {
+    const nextPromise = promises[Math.floor(Math.random() * promises.length)];
+    promiseOutput.textContent = nextPromise;
+  });
+
+  moodButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      moodButtons.forEach((item) => item.classList.remove("is-active"));
+      button.classList.add("is-active");
+      document.body.dataset.mood = button.dataset.mood;
+    });
+  });
+
+  let trailTimer;
+  document.addEventListener("mousemove", (event) => {
+    const heart = document.createElement("span");
+    heart.className = "float-heart";
+    heart.textContent = "💗";
+    heart.style.left = `${event.clientX}px`;
+    heart.style.top = `${event.clientY}px`;
+    heart.style.animationDuration = "1.2s";
+    heart.style.position = "fixed";
+    heart.style.zIndex = "0";
+    heart.style.pointerEvents = "none";
+    document.body.appendChild(heart);
+    clearTimeout(trailTimer);
+    trailTimer = setTimeout(() => heart.remove(), 1100);
+  });
+}
+
 function initAudio() {
   if (!audioElement) {
     return;
@@ -497,6 +539,7 @@ function init() {
   renderReasons();
   renderGallery();
   setUpQuiz();
+  attachPremiumInteractions();
   attachEvents();
   updateTimer();
   setInterval(updateTimer, 1000);

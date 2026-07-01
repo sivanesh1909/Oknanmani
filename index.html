@@ -6,7 +6,8 @@
     <meta name="theme-color" content="#130716" />
     <meta name="description" content="A luxurious birthday surprise for Kanmani" />
     <title>Happy Birthday My Kanmani</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=202607011" />
+    <link rel="stylesheet" href="auth.css" />
     <link rel="manifest" href="manifest.webmanifest" />
   </head>
   <body>
@@ -21,6 +22,231 @@
 
     <div class="ambient-layer" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
+
+    <div class="auth-screen" aria-live="polite">
+      <canvas class="auth-canvas" aria-hidden="true"></canvas>
+      <div class="auth-aurora" aria-hidden="true"></div>
+      <div class="auth-fog" aria-hidden="true"></div>
+      <div class="auth-moon" aria-hidden="true"></div>
+      <div class="auth-rain" aria-hidden="true"></div>
+      <div class="auth-quote-layer" aria-hidden="true"></div>
+      <div class="auth-content">
+        <div class="auth-card">
+          <div class="auth-intro is-visible">
+            <div class="auth-heart-lock" role="button" tabindex="0" aria-label="Begin the heart lock">❤️</div>
+            <div class="auth-character auth-character--intro">
+              <div class="auth-character-head">
+                <span class="auth-character-eye left"></span>
+                <span class="auth-character-eye right"></span>
+                <span class="auth-character-blush left"></span>
+                <span class="auth-character-blush right"></span>
+                <span class="auth-character-mouth"></span>
+              </div>
+              <div class="auth-character-speech">I’m waiting for the answer that knows my heart.</div>
+            </div>
+            <h1 class="auth-title">Welcome My Kanmani...</h1>
+            <p class="auth-copy">This is not just a website.<br />This is the door to my heart.<br />Only the one who truly knows me can unlock it.</p>
+            <button class="auth-begin-btn" type="button">Press the glowing heart to begin</button>
+          </div>
+
+          <div class="auth-question-shell">
+            <div class="auth-progress">Question <span>1 of 5</span></div>
+            <div class="auth-character">
+              <div class="auth-character-head">
+                <span class="auth-character-eye left"></span>
+                <span class="auth-character-eye right"></span>
+                <span class="auth-character-blush left"></span>
+                <span class="auth-character-blush right"></span>
+                <span class="auth-character-mouth"></span>
+              </div>
+              <div class="auth-character-speech">Choose the answer that belongs to my heart.</div>
+            </div>
+            <h2 class="auth-question">Who am I to you?</h2>
+            <div class="auth-options" role="listbox" aria-label="Answer options"></div>
+            <div class="auth-status"></div>
+          </div>
+
+          <div class="auth-success">
+            <div class="auth-heart-lock" aria-hidden="true">❤️</div>
+            <h2>You found the key to my heart.</h2>
+            <p class="auth-copy">My Heart Belongs Only To You<br />Welcome Home, My Kanmani ❤️</p>
+            <div class="auth-badge" style="display: none;">True Soulmate ❤️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const questions = [
+          {
+            prompt: 'Who am I to you?',
+            options: ['My man and father', 'Your favorite person', 'My safe place', 'The one who loves you most'],
+            correctIndex: 0
+          },
+          {
+            prompt: 'What is my nickname for you?',
+            options: ['Kanmani', 'Maya', 'Kavi', 'Kanna'],
+            correctIndex: 0
+          },
+          {
+            prompt: 'What was the colour of my dress on our first date?',
+            options: ['Pure white', 'Blue like the evening sky', 'Soft pink', 'Deep black'],
+            correctIndex: 1
+          },
+          {
+            prompt: 'What was the cost of the first flower I bought for you?',
+            options: ['70 rs', '80 rs', '75 rs', '60 rs'],
+            correctIndex: 0
+          },
+          {
+            prompt: 'On which date did you first cook for me?',
+            options: ['May 2 2026', 'April 2 2026', 'June 2 2026', 'May 5 2026'],
+            correctIndex: 0
+          }
+        ];
+
+        const introView = document.querySelector('.auth-intro');
+        const questionView = document.querySelector('.auth-question-shell');
+        const successView = document.querySelector('.auth-success');
+        const questionProgress = document.querySelector('.auth-progress span');
+        const questionPrompt = document.querySelector('.auth-question');
+        const optionBox = document.querySelector('.auth-options');
+        const statusEl = document.querySelector('.auth-status');
+        const heartLocks = document.querySelectorAll('.auth-heart-lock');
+        const beginButton = document.querySelector('.auth-begin-btn');
+        const pageContent = document.querySelector('.page-content');
+        const musicPlayer = document.querySelector('.music-player');
+        const authScreen = document.querySelector('.auth-screen');
+        let index = 0;
+        let locked = true;
+        let hasMistake = false;
+
+        const normalize = (value) => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+
+        function showIntro() {
+          introView.classList.add('is-visible');
+          questionView.classList.remove('is-visible');
+          successView.classList.remove('is-visible');
+          statusEl.className = 'auth-status';
+          statusEl.textContent = '';
+        }
+
+        function renderOptions() {
+          const question = questions[index];
+          optionBox.innerHTML = '';
+          question.options.forEach((option, optionIndex) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'auth-option';
+            button.dataset.answer = option;
+            button.textContent = option;
+            button.addEventListener('click', () => validateAnswer(optionIndex));
+            optionBox.appendChild(button);
+          });
+        }
+
+        function showQuestion() {
+          introView.classList.remove('is-visible');
+          questionView.classList.add('is-visible');
+          successView.classList.remove('is-visible');
+          const question = questions[index];
+          if (questionProgress) questionProgress.textContent = `${index + 1} of ${questions.length}`;
+          if (questionPrompt) questionPrompt.textContent = question.prompt;
+          statusEl.className = 'auth-status';
+          statusEl.textContent = '';
+          renderOptions();
+        }
+
+        function showSuccess() {
+          introView.classList.remove('is-visible');
+          questionView.classList.remove('is-visible');
+          successView.classList.add('is-visible');
+          if (pageContent) {
+            pageContent.style.opacity = '1';
+            pageContent.style.visibility = 'visible';
+            pageContent.style.filter = 'none';
+          }
+          if (musicPlayer) {
+            musicPlayer.style.opacity = '1';
+            musicPlayer.style.visibility = 'visible';
+            musicPlayer.style.pointerEvents = 'auto';
+          }
+          if (authScreen) authScreen.classList.add('is-hidden');
+          document.body.classList.remove('auth-active');
+        }
+
+        function validateAnswer(selectedIndex) {
+          const question = questions[index];
+          const buttons = Array.from(optionBox.querySelectorAll('.auth-option'));
+          const chosen = buttons[selectedIndex];
+          if (!chosen) return;
+
+          const selectedText = String(chosen.dataset.answer || chosen.textContent || '').trim();
+          const expectedText = String(question.options[question.correctIndex] || '').trim();
+          const isCorrect = selectedText === expectedText;
+
+          if (isCorrect) {
+            chosen.classList.add('is-correct');
+            statusEl.className = 'auth-status auth-status--correct';
+            statusEl.textContent = 'Correct ❤️';
+            if (index === questions.length - 1) {
+              locked = false;
+              showSuccess();
+            } else {
+              index += 1;
+              setTimeout(showQuestion, 650);
+            }
+          } else {
+            hasMistake = true;
+            chosen.classList.add('is-wrong');
+            questionView.classList.add('is-punished');
+            authScreen.classList.add('is-wrong');
+            statusEl.className = 'auth-status auth-status--error';
+            statusEl.textContent = 'That memory slipped away... a little punishment for the heart, my love.';
+            setTimeout(() => {
+              questionView.classList.remove('is-punished');
+              authScreen.classList.remove('is-wrong');
+            }, 800);
+          }
+        }
+
+        function beginFlow() {
+          document.body.classList.add('auth-active');
+          if (pageContent) {
+            pageContent.style.opacity = '0';
+            pageContent.style.visibility = 'hidden';
+            pageContent.style.filter = 'blur(12px)';
+          }
+          if (musicPlayer) {
+            musicPlayer.style.opacity = '0';
+            musicPlayer.style.visibility = 'hidden';
+            musicPlayer.style.pointerEvents = 'none';
+          }
+          showIntro();
+        }
+
+        beginFlow();
+
+        heartLocks.forEach((heart) => {
+          heart.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (locked) {
+              if (introView.classList.contains('is-visible')) {
+                showQuestion();
+              }
+            }
+          });
+        });
+
+        beginButton?.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (locked) showQuestion();
+        });
+      })();
+    </script>
 
     <main class="page-content">
       <section class="hero section" id="top">
@@ -110,6 +336,13 @@
           <h2>Birthday Cake</h2>
         </div>
         <div class="cake-card glass-card">
+          <div class="cake-card__halo" aria-hidden="true"></div>
+          <div class="cake-card__sparkles" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div class="cake-wrap">
             <div class="cake">
               <div class="cake-layer cake-top"></div>
@@ -120,8 +353,11 @@
               <div class="flame"></div>
             </div>
           </div>
-          <button class="cake-btn" id="cake-btn">🎂 Blow Candle</button>
-          <p class="cake-message" id="cake-message">Happy Birthday Kanmani ❤️</p>
+          <div class="cake-card__content">
+            <button class="cake-btn" id="cake-btn">🎂 Blow Candle</button>
+            <p class="cake-message" id="cake-message">Happy Birthday Kanmani ❤️</p>
+            <p class="cake-caption">Make a wish and let the stars glow for you.</p>
+          </div>
         </div>
       </section>
 
@@ -155,7 +391,42 @@
           <p class="quiz-answer" id="quiz-answer" hidden>Correct Answer ❤️</p>
         </div>
       </section>
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">A Touch of Magic</p>
+          <h2>Premium Interactions</h2>
+        </div>
+        <div class="premium-grid">
+          <div class="premium-card glass-card">
+            <div class="premium-card__header">
+              <h3>Heart Trail</h3>
+              <span>Move your cursor</span>
+            </div>
+            <p class="premium-card__copy">A soft trail of hearts follows your movements and makes the page feel alive.</p>
+          </div>
 
+          <div class="premium-card glass-card">
+            <div class="premium-card__header">
+              <h3>Romance Mood</h3>
+              <span>Choose a glow</span>
+            </div>
+            <div class="mood-switcher" role="tablist" aria-label="Choose a romantic mood">
+              <button class="mood-btn is-active" data-mood="rose">Rose</button>
+              <button class="mood-btn" data-mood="moon">Moon</button>
+              <button class="mood-btn" data-mood="gold">Gold</button>
+            </div>
+          </div>
+
+          <div class="premium-card glass-card">
+            <div class="premium-card__header">
+              <h3>Secret Promise</h3>
+              <span>Tap for a new line</span>
+            </div>
+            <button class="promise-generator" id="promise-generator" type="button">Reveal a Promise</button>
+            <p class="promise-output" id="promise-output">I will keep choosing your smile, every single day.</p>
+          </div>
+        </div>
+      </section>
       <section class="section final-section">
         <div class="final-card glass-card">
           <p class="eyebrow">Forever and Always</p>
@@ -192,6 +463,36 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="script.js?v=202607011"></script>
+    <script>
+      (function () {
+        function startExperience() {
+          const intro = document.querySelector('.auth-intro');
+          const question = document.querySelector('.auth-question-shell');
+          const input = document.querySelector('.auth-input');
+          const progress = document.querySelector('.auth-progress span');
+          const prompt = document.querySelector('.auth-question');
+          if (intro && question) {
+            intro.classList.remove('is-visible');
+            question.classList.add('is-visible');
+            if (progress) progress.textContent = '1 of 5';
+            if (prompt) prompt.textContent = 'Who am I to you?';
+            if (input) input.focus();
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('.auth-heart-lock, .auth-begin-btn').forEach(function (element) {
+            element.addEventListener('click', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+              startExperience();
+            });
+          });
+        });
+      })();
+    </script>
+    <script defer src="auth.js?v=20260701"></script>
   </body>
 </html>

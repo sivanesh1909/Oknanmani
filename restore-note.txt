@@ -1,0 +1,1 @@
+Restored the page to the earlier state by removing the Castle of Love feature integration.
